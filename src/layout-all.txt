@@ -1,0 +1,12 @@
+set "all".visible = true;
+set "all".radius = 0.05;
+
+set N.visible = true;
+set El.visible = true;
+set Er.visible = true;
+
+draw_head;
+
+draw_grid_2;
+
+draw_electrodes;

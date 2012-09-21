@@ -1,0 +1,67 @@
+define "layout": AF7, AFz, AF8, F3, F1, Fz, F2, F4, FT7, FC5, FC3, FC1, FCz, FC2, FC4, FC6, FT8, C5, C3, C1, Cz, C2,  C4, C6, CP5, CP3, CP1, CPz, CP2, CP4, CP6, P7, P3, Pz, P4, P8, PO3, POz, PO4, O1, Oz, O2, O9, Iz, O10;
+
+set "layout".visible = true;
+set "layout".show_label = false;
+set "layout".line_width = 0;
+set "layout".fill_color = [0,0,0];
+set "layout".radius = 0.02;
+set "layout".value = 0.0;
+
+set AF7.value = 0.0115;
+set AFz.value = 0.0473;
+set AF8.value = 0.0084;
+set F3.value = 0.0470;
+set F1.value = 0.1957;
+set Fz.value = 0.2067;
+set F2.value = 0.1304;
+set F4.value = 0.1473;
+set FT7.value = 0.0348;
+set FC5.value = 0.0378;
+set FC3.value = 0.1236;
+set FC1.value = 0.1536;
+set FCz.value = 0.1415;
+set FC2.value = 0.1041;
+set FC4.value = 0.1392;
+set FC6.value = 0.0477;
+set FT8.value = 0.0176;
+set C5.value = 0.0651;
+set C3.value = 0.3785;
+set C1.value = 0.3245;
+set Cz.value = 0.3189;
+set C2.value = 0.4653;
+set C4.value = 0.1485;
+set C6.value = 0.0222;
+set CP5.value = 0.1265;
+set CP3.value = 0.5839;
+set CP1.value = 0.4740;
+set CPz.value = 0.4778;
+set CP2.value = 0.2212;
+set CP4.value = 0.2309;
+set CP6.value = 0.0660;
+set P7.value = 0.0790;
+set P3.value = 0.3366;
+set Pz.value = 0.2922;
+set P4.value = 0.1032;
+set P8.value = 0.0517;
+set PO3.value = 0.3501;
+set POz.value = 0.3243;
+set PO4.value = 0.1261;
+set O1.value = 0.3337;
+set Oz.value = 0.2008;
+set O2.value = 0.1411;
+set O9.value = 0.0686;
+set Iz.value = 0.0520;
+set O10.value = 0.0430;
+
+set head_line_width = 0.01;
+set grid_line_width = 0.001;
+
+set topo_resolution = 128;
+set topo_radius = 1.0;
+
+
+draw_topo;
+
+draw_head;
+
+draw_electrodes;

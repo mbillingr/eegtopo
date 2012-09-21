@@ -1,0 +1,55 @@
+function eeg_circleplot( filename, channels, values )
+    
+    % Usage:
+    %  TOPOPLOT( FILENAME, DATASTRUCT )
+    %  TOPOPLOT( FILENAME, LABELS, VALUES )
+    
+    if nargin == 2
+        datastruct = channels;
+        channels = fieldnames( datastruct );
+        for i = 1 : length(channels);
+            values(i) = datastruct.(channels{i});
+        end
+    end
+    
+    for i = 1 : length(channels);
+        if strcmpi(channels{i},'I1'), channels{i} = 'O9'; end
+        if strcmpi(channels{i},'I2'), channels{i} = 'O10'; end
+    end
+    
+    scriptfile = [filename '.txt'];
+    mpath = fileparts(mfilename('fullpath'));
+    executable = 'eegtopo';
+    
+    if ~exist( [mpath filesep executable], 'file' )
+        error( [executable ' executable must be in the same directory as ' mfilename '.m (' scriptpath '/).'] );
+    end
+    
+    f = fopen( scriptfile, 'w' );
+    
+    chstr = sprintf( '%s,', channels{:} );
+    chstr(end) = [];
+    
+    fprintf( f, 'define "layout": %s;\n', chstr );
+    fprintf( f, 'set "layout".visible = true;\n' );
+    fprintf( f, 'set "layout".show_label = false;\n' );
+    fprintf( f, 'set "layout".line_width = 0;\n' );
+    fprintf( f, 'set "layout".fill_color = [0,0,0];\n' );
+    fprintf( f, 'set "layout".radius = 0.02;\n' );
+    fprintf( f, 'set "layout".value = 0.0;\n' );
+    
+    for i = 1 : length(channels)
+        fprintf( f, 'set %s.radius = %d;\n', channels{i}, values(i) );
+    end
+       
+    fprintf( f, 'draw_head;\n' );    
+    fprintf( f, 'draw_grid;\n' );
+    fprintf( f, 'draw_electrodes;\n' );    
+    
+    fclose( f );
+    
+    system( [mpath filesep executable ' -f' scriptfile ' -o' filename] );
+    
+    delete( scriptfile );
+    
+end

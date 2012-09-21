@@ -1,0 +1,41 @@
+define "10-20": Fp1, Fp2, F7, F3, Fz, F4, F8, T7, C3, Cz, C4, T8, P7, P3, Pz, P4, P8, O1, O2;
+
+set "10-20".visible = true;
+set "10-20".radius = 0.1;
+
+set Cz.label = "Ref";
+set Cz.font_color = [0, 0.9, 0];
+set Cz.fill_color = [0.9, 0.9, 0.5];
+set Cz.line_color = [0.5, 0.0, 0.0];
+set Cz.radius = 0.15;
+set Cz.line_width = 0.01;
+set Cz.font_family = "Times";
+set Cz.font_slant = 1;
+set Cz.font_weight = 0;
+
+set "10-20".value = 0.0;
+set C3.value = 1.0;
+set Cz.value = 1.5;
+set C4.value = 2.0;
+
+set head_line_width = 0.01;
+set grid_line_width = 0.001;
+set nose_angle = 20;
+set nose_length = 0.2;
+set ear_radius = 1.2;
+set ear_angle = 20;
+set ear_level = 1;
+
+set topo_resolution = 256;
+set topo_radius = 1.5;
+
+set draw_range_x = 2;
+set draw_range_y = 2;
+
+draw_topo;
+
+draw_head;
+
+draw_grid_1;
+
+draw_electrodes;

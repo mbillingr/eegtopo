@@ -1,0 +1,8 @@
+set "10-20".visible = true;
+set "10-20".radius = 0.1;
+
+draw_head;
+
+draw_grid_1;
+
+draw_electrodes;
