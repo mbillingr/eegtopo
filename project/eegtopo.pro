@@ -20,10 +20,10 @@ HEADERS += \
 
 unix {
     CONFIG += link_pkgconfig
-    PKGCONFIG += cairomm-1.0
+    PKGCONFIG += cairomm-1.0 eigen3
 }
 
-INCLUDEPATH += ../include/eigen3
+#INCLUDEPATH += ../include/eigen3
 
 LIBS += -lboost_program_options
 

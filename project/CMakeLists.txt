@@ -1,5 +1,7 @@
 cmake_minimum_required( VERSION 2.8 )
 
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_SOURCE_DIR}/cmake)
+
 project( GDF )
 
 if( UNIX )
@@ -12,14 +14,16 @@ endif( UNIX )
 
 find_package( Boost REQUIRED COMPONENTS program_options )
 
+find_package( Eigen3 REQUIRED )
+
 find_package( PkgConfig REQUIRED )
 
 pkg_search_module( CAIROMM REQUIRED cairomm-1.0 )
 
 include_directories(
 	../src
-	../include/eigen3
 	${Boost_INCLUDE_DIR}
+	${EIGEN3_INCLUDE_DIR}
 	${CAIROMM_INCLUDE_DIRS}
 )
 
