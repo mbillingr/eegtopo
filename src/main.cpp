@@ -66,6 +66,14 @@ int main( int argc, char *argv[] )
     store( command_line_parser( argc, argv ).options(desc).positional(pod).run(), vm );
     notify( vm );
 
+    if( argc == 1 )
+    {
+        cout << "GUI not yet implemented." << endl;
+        cout << "Command Line Usage: " + string(argv[0]) << " [options] [file] [options]" << endl;
+        cout << desc << endl;
+        return 0;
+    }
+
     if( vm.count("help") )
     {
         cout << "Usage: " + string(argv[0]) << " [options] [file] [options]" << endl;
