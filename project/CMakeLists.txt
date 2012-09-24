@@ -46,9 +46,5 @@ set( SOURCES
 	../src/parser.cpp
 )
 
-message( STATUS "Hello" )
-
-message( STATUS ${CAIROMM_CFLAGS} )
-
 add_executable( eegtopo ${HEADERS} ${SOURCES} )
 target_link_libraries( eegtopo ${Boost_LIBRARIES} ${CAIROMM_LIBRARIES} )
