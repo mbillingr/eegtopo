@@ -2,7 +2,7 @@ cmake_minimum_required( VERSION 2.8 )
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_SOURCE_DIR}/cmake)
 
-project( GDF )
+project( eegtopo )
 
 if( UNIX )
 	add_definitions( -Wall -Wextra -pedantic -Werror -fPIC )
