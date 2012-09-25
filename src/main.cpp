@@ -23,6 +23,10 @@
 #include "electrodegraphics.h"
 #include "electrodes.h"
 
+#ifdef GUI_ENABLED
+#include "gui/guimain.h"
+#endif
+
 #include <cairomm/cairomm.h>
 
 #include <boost/program_options.hpp>
@@ -69,10 +73,14 @@ int main( int argc, char *argv[] )
 
     if( argc == 1 )
     {
+#ifdef GUI_ENABLED
+        return gui_main( argc, argv );
+#else
         cout << "GUI not yet implemented." << endl;
         cout << "Command Line Usage: " + string(argv[0]) << " [options] [file] [options]" << endl;
         cout << desc << endl;
-        return 0;
+        return 1;
+#endif
     }
 
     if( vm.count("help") )
