@@ -2,8 +2,9 @@ TEMPLATE = app
 TARGET = eegtopo
 
 CONFIG += console
+CONFIG -= qt
 
-DEFINES += GUI_ENABLED
+DEFINES += "GUI_ENABLED"
 
 SOURCES += ../src/main.cpp \
     ../src/electrodes.cpp \
@@ -25,7 +26,7 @@ HEADERS += \
 
 unix {
     CONFIG += link_pkgconfig
-    PKGCONFIG += cairomm-1.0 eigen3
+    PKGCONFIG += gtkmm-3.0 cairomm-1.0 eigen3
 }
 
 #INCLUDEPATH += ../include/eigen3
