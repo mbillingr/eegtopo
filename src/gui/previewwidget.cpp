@@ -1,8 +1,7 @@
 #include "previewwidget.h"
 
-#include "../painter.h"
-
 PreviewWidget::PreviewWidget()
+    : painter( Cairo::RefPtr<Cairo::Context>() )
 {
 }
 
@@ -12,6 +11,7 @@ PreviewWidget::~PreviewWidget()
 
 bool PreviewWidget::on_draw( const Cairo::RefPtr<Cairo::Context>& context )
 {
+    painter.set_context( context );
 
     int w = get_width( );
     int h = get_height( );
@@ -29,7 +29,9 @@ bool PreviewWidget::on_draw( const Cairo::RefPtr<Cairo::Context>& context )
         context->scale( w, w );
     }
 
-    Painter painter( context );
+    context->scale( 0.5, 0.5 );
+    context->translate( 1, 1 );
+
     painter.draw_head( );
     painter.draw_grid( 2 );
 
