@@ -30,7 +30,7 @@
 #include <iostream>
 #include <cmath>
 
-Painter::Painter( Cairo::RefPtr<Cairo::Context> &cairo_context )
+Painter::Painter( const Cairo::RefPtr<Cairo::Context>& cairo_context )
 {
     using boost::assign::operator +=;
     cr = cairo_context;
