@@ -35,7 +35,10 @@ public:
 
     void set_context( const Cairo::RefPtr<Cairo::Context>& cairo_context );
 
-    void draw_first( );
+    void calculate_extents( double *x, double *y );
+    void autoscale( );
+
+    void draw( );
 
     void draw_head( );
     void draw_grid( int const& level );
@@ -72,8 +75,6 @@ private:
     Electrodes el0;
     std::map< std::string, ElectrodeGraphics > electrodes;
     std::map< std::string, std::vector<std::string> > groups;
-
-    bool first_draw;
 
     /*double head_linewidth;  // linewidth for head and nose
     double head_radius;     // radius of the head cirle

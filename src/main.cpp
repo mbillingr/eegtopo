@@ -145,6 +145,7 @@ int main( int argc, char *argv[] )
 
     if( vm.count("electrodes") )
     {
+        painter.autoscale( );
         painter.draw_head( );
         painter.draw_grid( 2 );
         painter.draw_layout( opt_elist, opt_radius );

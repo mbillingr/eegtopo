@@ -35,8 +35,6 @@ Painter::Painter( const Cairo::RefPtr<Cairo::Context>& cairo_context )
     using boost::assign::operator +=;
     cr = cairo_context;
 
-    first_draw = true;
-
     set<double>( "grid_line_width", 0.005 );
     set<double>( "head_line_width", 0.03 );
     set<double>( "head_radius", 1.0 );
@@ -51,6 +49,11 @@ Painter::Painter( const Cairo::RefPtr<Cairo::Context>& cairo_context )
 
     set<double>( "topo_resolution", 256 );
     set<double>( "topo_radius", 1.0 );
+
+    set<double>( "autoscale", 1.0 );
+    set<double>( "draw_head", 1.0 );
+    set<double>( "draw_grid", 2.0 );
+    set<double>( "draw_topo", 0.0 );
 
     el0.add_position( "N", 0, get<double>("head_radius") + get<double>("nose_length") );
     el0.add_position( "El", -get<double>("ear_radius"), 0 );
@@ -72,7 +75,7 @@ void Painter::set_context( const Cairo::RefPtr<Cairo::Context>& cairo_context )
     cr = cairo_context;
 }
 
-void Painter::draw_first( )
+void Painter::calculate_extents( double *x, double *y )
 {
     double x_extent = get<double>("draw_range_x");
     double y_extent = get<double>("draw_range_y");
@@ -119,16 +122,37 @@ void Painter::draw_first( )
         }
     }
 
-    cr->scale( 1.0/x_extent, -1.0/y_extent );
+    *x = x_extent;
+    *y = y_extent;
+}
 
-    first_draw = false;
+void Painter::autoscale( )
+{
+    double x, y;
+    calculate_extents( &x, &y );
+    double m = std::max( x, y );
+
+    cr->scale( 1.0 / m, 1.0 / m );
+}
+
+void Painter::draw( )
+{
+    if( get<double>("autoscale") != 0 )
+        autoscale( );
+
+    if( get<double>("draw_topo") != 0 )
+        draw_topo( );
+
+    if( get<double>("draw_head") != 0 )
+        draw_head( );
+
+    int grid = get<double>("draw_grid");
+    if( grid != 0 )
+        draw_grid( grid );
 }
 
 void Painter::draw_head( )
 {
-    if( first_draw )
-        draw_first( );
-
     // The Nose and head (and ears)
 
     cr->set_line_width( get<double>("head_line_width") );
@@ -175,9 +199,6 @@ void Painter::draw_head( )
 
 void Painter::draw_grid(const int &level )
 {
-    if( first_draw )
-        draw_first( );
-
     cr->set_line_width( get<double>("grid_line_width") );
     cr->arc( 0, 0, 0.8, 0, 2*M_PI );
 
@@ -213,9 +234,6 @@ void Painter::draw_grid(const int &level )
 
 void Painter::draw_layout( )
 {
-    if( first_draw )
-        draw_first( );
-
     double fontsize = 1.0;
     cr->set_font_size( fontsize );
 
@@ -325,9 +343,6 @@ void Painter::draw_layout( const std::vector< std::string >& el, double radius )
 
 void Painter::draw_topo()
 {
-    if( first_draw )
-        draw_first( );
-
     // TODO: don't hardcode values
     size_t N = get<double>("topo_resolution");
     double radius = get<double>("topo_radius");

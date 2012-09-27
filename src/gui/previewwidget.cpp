@@ -29,11 +29,10 @@ bool PreviewWidget::on_draw( const Cairo::RefPtr<Cairo::Context>& context )
         context->scale( w, w );
     }
 
-    context->scale( 0.5, 0.5 );
-    context->translate( 1, 1 );
+    context->scale( 0.5, -0.5 );
+    context->translate( 1, -1 );
 
-    painter.draw_head( );
-    painter.draw_grid( 2 );
+    painter.draw( );
 
     context->restore();
 
