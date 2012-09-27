@@ -13,7 +13,8 @@ SOURCES += ../src/main.cpp \
     ../src/painter.cpp \
     ../src/colormap.cpp \
     ../src/membermap.cpp \
-    ../src/gui/guimain.cpp
+    ../src/gui/guimain.cpp \
+    ../src/gui/previewwidget.cpp
 
 HEADERS += \
     ../src/electrodes.h \
@@ -22,7 +23,8 @@ HEADERS += \
     ../src/painter.h \
     ../src/colormap.h \
     ../src/membermap.h \
-    ../src/gui/guimain.h
+    ../src/gui/guimain.h \
+    ../src/gui/previewwidget.h
 
 unix {
     CONFIG += link_pkgconfig
