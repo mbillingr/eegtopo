@@ -102,7 +102,7 @@ namespace client
         pvars_()
         {
             // create dummy context
-            Cairo::RefPtr<Cairo::Context> cr = Cairo::Context::create( Cairo::ImageSurface::create( Cairo::FORMAT_A1, 0, 0 ) );
+            Cairo::RefPtr<Cairo::Context> cr;
 
             Painter p( cr );
             Painter::container_type::const_iterator it = p.members_begin();
