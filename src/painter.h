@@ -33,6 +33,8 @@ class Painter : public MemberMap
 public:
     Painter( const Cairo::RefPtr<Cairo::Context>& cairo_context );
 
+    void set_context( const Cairo::RefPtr<Cairo::Context>& cairo_context );
+
     void draw_first( );
 
     void draw_head( );

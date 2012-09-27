@@ -67,6 +67,11 @@ Painter::Painter( const Cairo::RefPtr<Cairo::Context>& cairo_context )
     groups["10-20"] += "Fp1", "Fp2", "F7", "F3", "Fz", "F4", "F8", "T7", "C3", "Cz", "C4", "T8", "P7", "P3", "Pz", "P4", "P8", "O1", "O2";
 }
 
+void Painter::set_context( const Cairo::RefPtr<Cairo::Context>& cairo_context )
+{
+    cr = cairo_context;
+}
+
 void Painter::draw_first( )
 {
     double x_extent = get<double>("draw_range_x");
