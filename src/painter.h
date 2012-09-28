@@ -63,6 +63,9 @@ public:
 
     void define_group( const std::string &group, const std::vector<std::string> &electrodes );
 
+    Electrodes &get_el( ) { return el0; }
+    const Electrodes &get_el( ) const { return el0; }
+
 protected:
     void arc3p( const Electrodes::point_t &a, const Electrodes::point_t &b, const Electrodes::point_t &c );
 
