@@ -30,11 +30,35 @@ find_package( PkgConfig REQUIRED )
 
 pkg_search_module( CAIROMM REQUIRED cairomm-1.0 )
 
+pkg_search_module( GTKMM REQUIRED gtkmm-3.0 )
+
+if( ${GTKMM_FOUND} )
+	message( STATUS "GTKMM found. Compiling GUI." )
+	message( STATUS ${GTKMM_INCLUDE_DIRS} )
+	add_definitions(-DGUI_ENABLED )
+
+	set( GUI_HEADERS
+		../src/gui/elselwidget.h
+		../src/gui/guimain.h
+		../src/gui/mainwindow.h
+		../src/gui/previewwidget.h
+	)
+	
+	set( GUI_SOURCES
+		../src/gui/elselwidget.cpp
+		../src/gui/guimain.cpp
+		../src/gui/mainwindow.cpp
+		../src/gui/previewwidget.cpp
+	)
+
+endif( ${GTKMM_FOUND} )
+
 include_directories(
 	../src
 	${Boost_INCLUDE_DIR}
 	${EIGEN3_INCLUDE_DIR}
 	${CAIROMM_INCLUDE_DIRS}
+	${GTKMM_INCLUDE_DIRS}
 )
 
 set( HEADERS
@@ -44,6 +68,7 @@ set( HEADERS
 	../src/membermap.h
 	../src/painter.h
 	../src/parser.h
+	${GUI_HEADERS}
 )
 
 set( SOURCES
@@ -54,7 +79,8 @@ set( SOURCES
 	../src/membermap.cpp
 	../src/painter.cpp
 	../src/parser.cpp
+	${GUI_SOURCES}
 )
 
 add_executable( eegtopo ${HEADERS} ${SOURCES} )
-target_link_libraries( eegtopo ${Boost_LIBRARIES} ${CAIROMM_LIBRARIES} )
+target_link_libraries( eegtopo ${Boost_LIBRARIES} ${CAIROMM_LIBRARIES} ${GTKMM_LIBRARIES} )
