@@ -38,6 +38,9 @@ public:
 
     void init_widgets( );
 
+    void set_visible( std::string label, bool vis );
+    void set_visible(std::vector<std::string> labels );
+
     virtual void on_size_allocate( Gtk::Allocation& allocation );
 
     virtual bool on_draw( const Cairo::RefPtr<Cairo::Context>& context );
@@ -47,6 +50,8 @@ public:
     virtual void get_preferred_height_vfunc(int& minimum_height, int& natural_height) const;
     virtual void get_preferred_width_for_height_vfunc(int height, int& minimum_width, int& natural_width) const;
     virtual void get_preferred_height_for_width_vfunc(int width, int& minimum_height, int& natural_height) const;
+
+    const Painter& get_painter( ) const { return painter; }
 
 private:
     typedef Gtk::CheckButton ButtonWidget;

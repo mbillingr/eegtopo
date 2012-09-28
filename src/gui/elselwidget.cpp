@@ -57,6 +57,30 @@ void ElselWidget::init_widgets( )
     show_all_children( );
 }
 
+void ElselWidget::set_visible( std::string label, bool vis )
+{
+    ButtonWidget *b = buttons[label];
+    b->set_visible( vis );
+
+    // uncheck invisible button
+    b->set_active( vis && b->get_active() );
+}
+
+void ElselWidget::set_visible( std::vector<std::string> labels )
+{
+    map_label_button::iterator it = buttons.begin( );
+    for( ; it!=buttons.end(); it++ )
+    {
+        it->second->set_visible( false );
+        it->second->set_active( false );
+    }
+
+    for( size_t i=0; i<labels.size(); i++ )
+    {
+        set_visible( labels[i], true );
+    }
+}
+
 void ElselWidget::on_size_allocate( Gtk::Allocation& allocation )
 {
     map_label_button::iterator it = buttons.begin( );
@@ -108,7 +132,7 @@ bool ElselWidget::on_draw( const Cairo::RefPtr<Cairo::Context>& context )
 
     context->restore();
 
-    Gtk::Fixed::on_draw( context );
+    return Gtk::Fixed::on_draw( context );
 }
 
 Gtk::SizeRequestMode ElselWidget::get_request_mode_vfunc() const
