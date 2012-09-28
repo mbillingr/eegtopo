@@ -1,3 +1,24 @@
+/*
+ *  This file is part of EEGtopo.
+ *
+ *  Foobar is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  Foobar is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ *
+ *  Copyright 2012 Martin Billinger
+ *
+ */
+
 #include "elselwidget.h"
 
 #include <iostream>
@@ -7,6 +28,7 @@ ElselWidget::ElselWidget()
       painter( Cairo::RefPtr<Cairo::Context>() )
 {
     scale = 0.8;
+    init_widgets( );
 }
 
 ElselWidget::~ElselWidget()
@@ -20,8 +42,8 @@ ElselWidget::~ElselWidget()
 
 void ElselWidget::init_widgets( )
 {
-    Electrodes::const_iterator it = el.begin();
-    for( ; it!=el.end(); it++ )
+    Electrodes::const_iterator it = painter.get_el().begin();
+    for( ; it!=painter.get_el().end(); it++ )
     {
         ButtonWidget* b = new ButtonWidget();
         buttons[it->first] = b;
@@ -46,10 +68,10 @@ void ElselWidget::on_size_allocate( Gtk::Allocation& allocation )
 
     for( ; it!=buttons.end(); it++ )
     {
-        Electrodes::point_t p = el.get( it->first );
+        Electrodes::point_t p = painter.get_el().get( it->first );
 
         int x = ( scale * p.x * m + w - it->second->get_width() ) * 0.5;
-        int y = ( scale * p.y * m + h - it->second->get_height() ) * 0.5;
+        int y = ( -scale * p.y * m + h - it->second->get_height() ) * 0.5;
 
         move( *it->second, x, y );
     }
@@ -91,7 +113,7 @@ bool ElselWidget::on_draw( const Cairo::RefPtr<Cairo::Context>& context )
 
 Gtk::SizeRequestMode ElselWidget::get_request_mode_vfunc() const
 {
-    return Gtk::SIZE_REQUEST_HEIGHT_FOR_WIDTH;
+    return Gtk::SIZE_REQUEST_CONSTANT_SIZE;
 }
 
 void ElselWidget::get_preferred_width_vfunc(int& minimum_width, int& natural_width) const
@@ -107,8 +129,8 @@ void ElselWidget::get_preferred_width_vfunc(int& minimum_width, int& natural_wid
     double natural_distance = sqrt( button_natural_width*button_natural_width +
                                       button_natural_height*button_natural_height );
 
-    double minimum_scale = minimum_distance / ( el.get_mindist() * scale );
-    double natural_scale = natural_distance / ( el.get_mindist() * scale );
+    double minimum_scale = minimum_distance / ( painter.get_el().get_mindist() * scale );
+    double natural_scale = natural_distance / ( painter.get_el().get_mindist() * scale );
 
     minimum_width = ceil( minimum_scale );
     natural_width = ceil( natural_scale );
