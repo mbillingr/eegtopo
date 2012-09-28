@@ -31,7 +31,7 @@ MainWindow::MainWindow()
 {
     using boost::assign::operator +=;
 
-    elgroups["none"];
+    elgroups["none"] += "N", "El", "Er";
 
     Electrodes::const_iterator it = elsel.get_painter().get_el().begin();
     for( ; it != elsel.get_painter().get_el().end(); it++ )
@@ -41,12 +41,14 @@ MainWindow::MainWindow()
 
     elgroups["10-20"] += "Fp1", "Fp2", "F7", "F3", "Fz", "F4", "F8", "T7", "C3", "Cz",
                          "C4", "T8", "P7", "P3", "Pz", "P4", "P8", "O1", "O2";
+    elgroups["10-20"] += "N", "El", "Er";
 
     elgroups["extended"] += "AF7", "AFz", "AF8", "F3", "F1", "Fz", "F2", "F4", "FT7",
                             "FC5", "FC3", "FC1", "FCz", "FC2", "FC4", "FC6", "FT8",
                             "C5", "C3", "C1", "Cz", "C2", "C4", "C6", "CP5", "CP3",
                             "CP1", "CPz", "CP2", "CP4", "CP6", "P7", "P3", "Pz", "P4",
                             "P8", "PO3", "POz", "PO4", "O1", "Oz", "O2", "O9", "Iz", "O10";
+    elgroups["extended"] += "N", "El", "Er";
 
     //elgroups["additional"] += "Fp1", "Fp2", "F7", "F3", "Fz", "F4", "F8", "T7", "C3", "Cz", "C4", "T8", "P7", "P3", "Pz", "P4", "P8", "O1", "O2";
 
