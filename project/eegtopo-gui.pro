@@ -14,7 +14,8 @@ SOURCES += ../src/main.cpp \
     ../src/colormap.cpp \
     ../src/membermap.cpp \
     ../src/gui/guimain.cpp \
-    ../src/gui/previewwidget.cpp
+    ../src/gui/previewwidget.cpp \
+    ../src/gui/elselwidget.cpp
 
 HEADERS += \
     ../src/electrodes.h \
@@ -24,7 +25,8 @@ HEADERS += \
     ../src/colormap.h \
     ../src/membermap.h \
     ../src/gui/guimain.h \
-    ../src/gui/previewwidget.h
+    ../src/gui/previewwidget.h \
+    ../src/gui/elselwidget.h
 
 unix {
     CONFIG += link_pkgconfig
