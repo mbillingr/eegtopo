@@ -19,17 +19,36 @@
  *
  */
 
-#include "guimain.h"
+#ifndef MAINWINDOW_H
+#define MAINWINDOW_H
 
-#include "mainwindow.h"
+#include "previewwidget.h"
+#include "elselwidget.h"
 
-#include <gtkmm/application.h>
+#include <gtkmm/box.h>
+#include <gtkmm/comboboxtext.h>
+#include <gtkmm/frame.h>
+#include <gtkmm/window.h>
 
-int gui_main( int argc, char *argv[] )
+class MainWindow : public Gtk::Window
 {
-    Glib::RefPtr<Gtk::Application> app = Gtk::Application::create( argc, argv, "EEGtopo" );
+public:
+    MainWindow();
+    virtual ~MainWindow();
 
-    MainWindow window;
+    void on_elselcombo_changed( );
 
-    return app->run( window );
-}
+private:
+    std::map< std::string, std::vector<std::string> > elgroups;
+
+    ElselWidget elsel;
+    Gtk::ComboBoxText elselcombo;
+    Gtk::Frame elselframe;
+    Gtk::Box elselbox;
+
+    PreviewWidget preview;
+
+    Gtk::Box leftright;
+};
+
+#endif // MAINWINDOW_H
