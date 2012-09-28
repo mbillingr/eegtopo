@@ -45,7 +45,7 @@ function eeg_circleplot( filename, channels, values )
     executable = 'eegtopo';
 
     if ~exist( [mpath filesep executable], 'file' )
-        error( [executable ' executable must be in the same directory as ' mfilename '.m (' scriptpath '/).'] );
+        error( [executable ' executable must be in the same directory as ' mfilename '.m (' mpath '/).'] );
     end
 
     f = fopen( scriptfile, 'w' );
